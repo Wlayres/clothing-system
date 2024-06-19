@@ -62,30 +62,38 @@ def validar_login():
         return False
     
 # Definindo tela de opções
-hud_selecao = ctk.CTkToplevel(tela_login)
-hud_selecao.title("Selecione o que Deseja")
-hud_selecao.geometry("700x700")
 
-# Configurando a grade
-hud_selecao.grid_rowconfigure(0, weight=1)
-hud_selecao.grid_rowconfigure(1, weight=1)
-hud_selecao.grid_rowconfigure(2, weight=1)
-hud_selecao.grid_rowconfigure(3, weight=1)
-hud_selecao.grid_columnconfigure(0, weight=1)
-hud_selecao.grid_columnconfigure(1, weight=1)
+def abir_hud():
+    validar_login()
+    if validar_login():
+        tela_login.withdraw()
+    hud_selecao = ctk.CTkToplevel(tela_login)
+    hud_selecao.title("Selecione o que Deseja")
+    hud_selecao.geometry("700x700")
 
-# Widgets Hud_seleção
-botao_usuarios = ctk.CTkButton(hud_selecao, width=200, height=200, text="Usuários")
-botao_usuarios.grid(row=0, column=0, padx=10, pady=10)
+    # Configurando a grade
+    hud_selecao.grid_rowconfigure(0, weight=1)
+    hud_selecao.grid_rowconfigure(1, weight=1)
+    hud_selecao.grid_rowconfigure(2, weight=1)
+    hud_selecao.grid_rowconfigure(3, weight=1)
+    hud_selecao.grid_columnconfigure(0, weight=1)
+    hud_selecao.grid_columnconfigure(1, weight=1)
 
-botao_adm = ctk.CTkButton(hud_selecao, width=200, height=200, text="Admin")
-botao_adm.grid(row=0, column=1, padx=10, pady=10)
+    # Widgets Hud_seleção
+    botao_usuarios = ctk.CTkButton(hud_selecao, width=200, height=200, text="Usuários")
+    botao_usuarios.grid(row=0, column=0, padx=10, pady=10)
 
-botao_produtos = ctk.CTkButton(hud_selecao, width=200, height=200, text="Produtos")
-botao_produtos.grid(row=1, column=0, padx=10, pady=10)
+    botao_adm = ctk.CTkButton(hud_selecao, width=200, height=200, text="Admin")
+    botao_adm.grid(row=0, column=1, padx=10, pady=10)
 
-botao_cadastro = ctk.CTkButton(hud_selecao, width=200, height=200, text="Cadastro")
-botao_cadastro.grid(row=1, column=1, padx=10, pady=10)
+    botao_produtos = ctk.CTkButton(hud_selecao, width=200, height=200, text="Produtos")
+    botao_produtos.grid(row=1, column=0, padx=10, pady=10)
+
+    botao_cadastro = ctk.CTkButton(hud_selecao, width=200, height=200, text="Cadastro")
+    botao_cadastro.grid(row=1, column=1, padx=10, pady=10)
+
+    botao_voltar = ctk.CTkButton(hud_selecao, text="Voltar")
+    botao_voltar.grid(row=2,column=0)
 
 # Tela Login
 label_usuario = ctk.CTkLabel(tela_login, width=250, height=50, text="Usuário")
