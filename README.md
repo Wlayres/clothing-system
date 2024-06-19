@@ -1,2 +1,4 @@
 # Market-system
-Repositorio para portfólio
+{Repositório para portfólio}
+
+Nesse repositório, estou colocando meus conhecimentos em interfaces gráficas em Python e desenvolvimento Web.
