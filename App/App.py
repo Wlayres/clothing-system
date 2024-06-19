@@ -1,10 +1,9 @@
-#Biblioteca Utilizada
+# Biblioteca Utilizada
 import customtkinter as ctk 
 from tkinter import Frame, messagebox, ttk
 import mysql.connector
 
-
-#Definindo Tela de login
+# Definindo Tela de login
 tela_login = ctk.CTk()
 tela_login._set_appearance_mode("System")
 tela_login.geometry("500x500")
@@ -12,8 +11,7 @@ tela_login.title("Janela de Login")
 tela_login.maxsize(width=500, height=500)
 tela_login.minsize(width=500, height=500)
 
-
-#Inicio Funções
+# Inicio Funções
 
 # Função para fazer login
 def login(usuario, senha):
@@ -21,9 +19,9 @@ def login(usuario, senha):
         # Conexão com o banco de dados
         conn = mysql.connector.connect(
             host="localhost",
-            user="admin",
+            user="root",
             password="",
-            database="admins"
+            database="market-system"
         )
 
         cursor = conn.cursor()
@@ -46,7 +44,7 @@ def login(usuario, senha):
         if 'conn' in locals() and conn.is_connected():
             cursor.close()
             conn.close()
-            
+
 # Função para validar o login
 def validar_login():
     usuario = input_usuario.get()
@@ -58,15 +56,27 @@ def validar_login():
         return True
     else:
         messagebox.showerror("Login", "Login falhou. Verifique suas credenciais.")
-        print("Verifique a conexão com o banco de dados e Suas Credenciais")
+        print("Verifique a conexão com o banco de dados e suas credenciais.")
         return False
-    
-# Definindo tela de opções
 
-def abir_hud():
-    validar_login()
-    if validar_login():
-        tela_login.withdraw()
+def login_valido_hud_selecao():
+    try:
+        if validar_login():
+            abrir_hud()
+            tela_login.withdraw()
+    except Exception as e:  
+        print(f"Erro ao validar login: {e}")
+
+# Definindo tela de opções
+def abrir_hud():
+    hud_de_selecao()
+
+def hud_de_selecao():
+    
+    def voltar_tela_inicial():
+        hud_selecao.withdraw()
+        tela_login.deiconify()
+    
     hud_selecao = ctk.CTkToplevel(tela_login)
     hud_selecao.title("Selecione o que Deseja")
     hud_selecao.geometry("700x700")
@@ -92,8 +102,8 @@ def abir_hud():
     botao_cadastro = ctk.CTkButton(hud_selecao, width=200, height=200, text="Cadastro")
     botao_cadastro.grid(row=1, column=1, padx=10, pady=10)
 
-    botao_voltar = ctk.CTkButton(hud_selecao, text="Voltar")
-    botao_voltar.grid(row=2,column=0)
+    botao_voltar = ctk.CTkButton(hud_selecao, text="Voltar", command=voltar_tela_inicial)
+    botao_voltar.grid(row=2, column=0)
 
 # Tela Login
 label_usuario = ctk.CTkLabel(tela_login, width=250, height=50, text="Usuário")
@@ -105,10 +115,10 @@ input_usuario.pack(pady=10)
 label_senha = ctk.CTkLabel(tela_login, width=250, height=50, text="Senha")
 label_senha.pack(pady=10)
 
-input_senha = ctk.CTkEntry(tela_login, width=250, height=50, fg_color="white")
+input_senha = ctk.CTkEntry(tela_login, width=250, height=50, fg_color="white", show='*')
 input_senha.pack(pady=10)
 
-button_entrar = ctk.CTkButton(tela_login, text="Entrar!", fg_color="black", command=validar_login)
+button_entrar = ctk.CTkButton(tela_login, text="Entrar!", fg_color="black", command=login_valido_hud_selecao)
 button_entrar.place(x=175, y=330)
 
 tela_login.mainloop()
