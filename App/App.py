@@ -1,7 +1,11 @@
 # Biblioteca Utilizada
-import customtkinter as ctk 
-from tkinter import Frame, messagebox, ttk
+import tkinter as tk
+from tkinter import Frame, PhotoImage, messagebox, ttk
 import mysql.connector
+import customtkinter as ctk
+from customtkinter import CTkCanvas, CTkLabel, CTkEntry, CTkButton, CTkToplevel
+from PIL import ImageTk, Image
+import pyglet
 
 # Definindo Tela de login
 tela_login = ctk.CTk()
